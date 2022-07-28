@@ -72,6 +72,6 @@ while keep_playing:
                 break
     if turn_counter - 9 and not(victory(grid, "x") or victory(grid, "o")):
         print("Draw game!")
-    N = input("Enter N to stop playing, any other character to try again!")
-    if "n" in str.lower(N):
+    N = input("Enter N to stop playing, any other character to try again!").lower()
+    if "n" in N:
         keep_playing = False
