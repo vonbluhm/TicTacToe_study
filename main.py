@@ -22,20 +22,32 @@ def victory(grid_, player):
         return True
     if grid_[2] == grid_[4] == grid_[6] == player:
         return True
-    else: return False
+    else:
+        return False
 
 
 def move(grid_, player):
     print_grid(grid_)
     print("Player", player + ", make your move!")
     invalid_move = True
+    valid_values = ("0", "1", "2")
     while invalid_move:
-        i = input("Row number: ")
-        j = input("Column number: ")
-        if grid_[int(i)*3+int(j)] != "-":
+        while True:
+            i = input("Row number: ")
+            if i in valid_values:
+                break
+            else:
+                print("Invalid value")
+        while True:
+            j = input("Column number: ")
+            if j in valid_values:
+                break
+            else:
+                print("Invalid value")
+        if grid_[int(i) * 3 + int(j)] != "-":
             print("Invalid move!")
         else:
-            grid_[int(i)*3+int(j)] = player
+            grid_[int(i) * 3 + int(j)] = player
             invalid_move = False
     return print_grid(grid_)
 
@@ -58,7 +70,8 @@ while keep_playing:
             if victory(grid, "x"):
                 print("Crosses win!")
                 break
-    if turn_counter == 9: print("Draw game!")
+    if turn_counter - 9 and not(victory(grid, "x") or victory(grid, "o")):
+        print("Draw game!")
     N = input("Enter N to stop playing, any other character to try again!")
-    if str.lower(N) == "n":
+    if "n" in str.lower(N):
         keep_playing = False
